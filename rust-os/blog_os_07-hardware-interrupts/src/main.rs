@@ -10,14 +10,26 @@ use blog_os::vga_buffer;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    blog_os::init();
     vga_buffer::init();
+
     println!("Hello World{}", "!");
-    println!("7 x 8 = {}", 7 * 8);
+    println!("another line");
+
+    // uncomment to see timer
+    /*
+    loop {
+        // slowdown a bit
+        for _ in 0..100000 {}
+        use blog_os::print;
+        print!("-");        // new
+    }*/
+
     print!(".EOF.");
     #[cfg(test)]
     test_main();
 
-    loop {}
+    blog_os::hlt_loop();
 }
 
 /// This function is called on panic.
@@ -25,7 +37,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    blog_os::hlt_loop();
 }
 
 #[cfg(test)]
