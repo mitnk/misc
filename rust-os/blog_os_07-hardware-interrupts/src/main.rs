@@ -13,6 +13,7 @@ pub extern "C" fn _start() -> ! {
     blog_os::init();
     vga_buffer::init();
 
+    println!("");
     println!("Hello World{}", "!");
     println!("another line");
 

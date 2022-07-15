@@ -87,7 +87,6 @@ impl Writer {
     ///
     /// Wraps lines at `BUFFER_WIDTH`. Supports the `\n` newline character.
     pub fn write_byte(&mut self, byte: u8) {
-
         match byte {
             b'\n' => self.new_line(),
             byte => {
